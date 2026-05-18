@@ -493,8 +493,7 @@ below image show the breakdown of a control word
 BSR command is used to utilize the single lines of port c without affecting other lines as they are busy with port a and port b for handshaking 
 
 
-# 8259 Programmable in
-terrupt controller
+# 8259 Programmable interrupt controller
 
 ![[Pasted image 20260514190235.png]]
 
@@ -532,3 +531,86 @@ pehla INTA milne par PIC interupt ka opcode bhejta hai mp ko , uske bad mp 2nd I
 uske bad PIC ISR ke address ki higher bytes bhejta hai 
 
 fir mp us address pe jake ISR exec karta hai aur PIC ko EOI signal(end of interuupt) bhejta hai aur normal program exec start kar deta hai 
+
+
+
+
+
+# Segmentation in 8086
+
+20 bit ka address bu hai isme 
+yani ki 1mb ki memory 
+itni badi memory ko raw handlw karna mushkil hai 
+aur 20bit ka address yani ki 2.5 bytes which is gonna waste half byte everytime we store it 
+
+to overcome this problme we have segmentation
+here memory is devided into parts called segment
+
+each segment is used for different storrage like 
+stack segment data segment code segment extra segment
+
+now we dont use physical or actual address all the time 
+we use virtual address and then we calculate physical address when we want to acces the location
+
+to make the virtual address we use segment address and offset address 
+
+segment address is the address where that segment starts and offset is the specific part of offset in that segment where our data is present 
+
+to make it possible we use segment registers and offset registers which are of 16 bits 
+
+physical address  = segment address * 10 + offset address 
+
+each segment is minimum 16 bytes (16 locations )
+ and maximum 64kb 
+
+# 8086 
+![[Pasted image 20260517123952.png]]
+
+8086 ek 16 bit ka processor hai 
+isme 16 bit ki data bus hai 
+isme 20 bit ki address bus hia 
+isme 16 bit ka alu hai 
+register bhi 16 bit hai 
+ye ek bar me 16 bit operations perform kar sakta hai 
+iski address capacity 2 raise to 20 yani ki 1 mb hai 
+256 vectored interrupts hain 
+it also supports multiply and divide instructions
+
+
+
+
+# 8086 flag register 
+![[Pasted image 20260517190822.png]]
+
+U means undefined 
+overflowe flag shows overflow in result
+direction flag shows whether to read the byte from higher to lower or lower to higher
+Interrupt flag shows whether maskable interuupts are enabled or desabled 
+Trap flag means whether the program will run in one go or not 
+sign flag for positive or negative result
+zero flag for checking if result is zero
+Auxiliary cary flag parity flag carry flag
+
+
+
+
+# 8086 pin diagram
+
+![[Pasted image 20260517204948.png]]
+
+
+
+
+# 80286 
+
+24 bit ki address bus hoti hai 
+to 16mb ki memory support karta hai 
+do modes hote hain - real address mode and virtual address mode 
+real address mode me 1mb ki physical memory access kar sakta hai
+virtual address mode 16mb ki physcial and 1gb ki virtual memory access kar sakta hai 
+multi user support multi tasking support 
+protection abilities process control memory management etc sab deta hai 
+
+![[Pasted image 20260518094447.png]]
+
+
